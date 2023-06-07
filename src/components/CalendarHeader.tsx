@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import * as React from 'react'
 import { Platform, Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 
+import { HEADER_HEIGHT } from '../../stories/components/AppHeader'
 import { eventCellCss, u } from '../commonStyles'
 import { ICalendarEventBase } from '../interfaces'
 import { useTheme } from '../theme/ThemeContext'
@@ -25,7 +26,6 @@ export interface CalendarHeaderProps<T extends ICalendarEventBase> {
 
 function _CalendarHeader<T extends ICalendarEventBase>({
   dateRange,
-  cellHeight,
   style,
   allDayEvents,
   onPressDateHeader,
@@ -79,7 +79,7 @@ function _CalendarHeader<T extends ICalendarEventBase>({
           >
             <View
               style={[
-                { height: cellHeight },
+                { height: dayHeaderStyle.height ?? HEADER_HEIGHT },
                 objHasContent(headerContentStyle) ? headerContentStyle : u['justify-between'],
               ]}
             >
@@ -143,7 +143,7 @@ function _CalendarHeader<T extends ICalendarEventBase>({
                 style={[
                   u['border-l'],
                   { borderColor: theme.palette.gray['200'] },
-                  { height: cellHeight },
+                  { height: dayHeaderStyle.height ?? HEADER_HEIGHT },
                 ]}
               >
                 {allDayEvents.map((event, index) => {
